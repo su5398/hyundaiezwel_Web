@@ -12,6 +12,16 @@ public class MyBoard {
 	//생성자(기본,매개변수), getter&setter
 	public MyBoard() {}
 
+	//insert
+	public MyBoard(String myname, String mytitle, String mycontent) {
+		super();
+		this.myname = myname;
+		this.mytitle = mytitle;
+		this.mycontent = mycontent;
+	}
+
+
+
 	public MyBoard(int myno, String myname, String mytitle, String mycontent, Date mydate) {
 		super();
 		this.myno = myno;
