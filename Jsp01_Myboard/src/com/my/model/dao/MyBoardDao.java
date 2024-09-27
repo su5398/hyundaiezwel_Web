@@ -205,6 +205,7 @@ public class MyBoardDao {
 	}
 	//삭제
 	public int delete(int myno) {
+		System.out.println("dao delete method");
 		try {
 			con = DriverManager.getConnection(url,username,password);
 			System.out.println("02. 계정 연결");
@@ -238,8 +239,6 @@ public class MyBoardDao {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		return 0; 
+		return res; 
 	}
 }

@@ -17,6 +17,17 @@
 	MyBoardDao dao = new MyBoardDao();
 	int res = dao.delete(myno);
 	
+	if(res>0){
+%>
+	<h1>글 삭제 성공</h1>
+	<button onclick="location.href='mylist.jsp'">확인</button>
+<%
+	}else{
+%>
+	<h1>글 삭제 실패</h1>
+	<button onclick="location.href='selectone.jsp?myno=<%=myno%>'">확인</button>
+<%
+	}
 %>
 </body>
 </html>
