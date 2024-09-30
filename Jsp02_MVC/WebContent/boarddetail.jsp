@@ -36,6 +36,15 @@
 		<th>CONTENT</th>
 		<td><textarea rows="10" cols="40" readonly="readonly"><%=dto.getContent() %></textarea></td>
 	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" value="update" 
+			onclick="location.href='mycontroller.jsp?command=boardupdateform&seq=<%=dto.getSeq()%>'">
+			<input type="button" value="delete" 
+			onclick="location.href='mycontroller.jsp?command=boarddelete&seq=<%=dto.getSeq()%>'">
+			<input type="button" value="list" onclick="location.href='mycontroller.jsp?command=boardlist'">
+		</td>
+	</tr>
 </table>
 </body>
 </html>
