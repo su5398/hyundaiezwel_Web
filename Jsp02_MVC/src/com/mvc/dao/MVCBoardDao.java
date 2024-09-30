@@ -1,6 +1,7 @@
 package com.mvc.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -55,11 +56,68 @@ public class MVCBoardDao {
 	}
 	//단일선택
 	public MVCBoardDto selectOne(int seq) {
-		return null;
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		MVCBoardDto res = new MVCBoardDto();
+		
+		String sql = " SELECT * FROM MVCBOARD WHERE SEQ=? ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, seq);
+			System.out.println("03. query 준비: "+sql);
+			
+			rs = pstm.executeQuery();
+			System.out.println("04. query 실행 및 리턴");
+			if(rs.next()) {
+				res.setSeq(rs.getInt(1));
+				res.setWriter(rs.getString(2));
+				res.setTitle(rs.getString(3));
+				res.setContent(rs.getString(4));
+				res.setRegdate(rs.getDate(5));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+			System.out.println("05. db 종료\n");
+		}
+		
+		return res;
 	}
 	//추가
 	public int insert(MVCBoardDto dto) {
-		return 0;
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int res=0;
+		
+		String sql = " INSERT INTO MVCBOARD VALUES(SEQ_MVCBOARD.NEXTVAL, ?,?,?,CURRENT_DATE) ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, dto.getWriter());
+			pstm.setString(2, dto.getTitle());
+			pstm.setString(3, dto.getContent());
+			System.out.println("03. query 준비: "+sql);
+			
+			res=pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+			
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			close(con);
+			System.out.println("05. db 종료\n");
+		}
+		
+		return res;
 	}
 	//수정
 	public int update(MVCBoardDto dto) {
