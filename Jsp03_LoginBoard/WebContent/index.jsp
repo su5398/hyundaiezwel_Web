@@ -12,7 +12,8 @@
 <body>
 <div style="width:300px">
 	<h1 style="text-align:center">LOGIN</h1>
-	<form>
+	<form action="membercontroller.jsp">
+		<input type="hidden" name="command" value="login">
 		<table>
 			<col width="100"><col width="100">
 			<tr>
