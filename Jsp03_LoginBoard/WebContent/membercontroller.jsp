@@ -62,6 +62,36 @@
 	}else if(command.equals("userlistall")){
 		//전체 유저 정보 조회
 		List<MyMemberDto> list = dao.selectAll();
+		
+		request.setAttribute("list",list);
+		pageContext.forward("userlistall.jsp");
+	}else if(command.equals("updateroleform")){
+		int myno = Integer.parseInt(request.getParameter("myno"));
+		MyMemberDto dto = dao.selectUser(myno);
+		
+		request.setAttribute("selectone",dto);
+		pageContext.forward("updateroleform.jsp");
+	}else if (command.equals("updaterole")){
+		int myno = Integer.parseInt(request.getParameter("myno"));
+		String myrole = request.getParameter("myrole");
+		
+		int res = dao.updateRole(myno,myrole);
+		
+		if(res>0){
+			request.setAttribute("msg","회원등급 조정 성공");
+			request.setAttribute("url","membercontroller.jsp?command=userlistall");
+		}else{
+			request.setAttribute("msg","회원등급 조정 실패");
+			request.setAttribute("url","membercontroller.jsp?command=updateroleform&myno="+myno);
+		}
+		
+		pageContext.forward("result.jsp");
+	}else if(command.equals("userinfo")){
+		int myno = Integer.parseInt(request.getParameter("myno"));
+		MyMemberDto dto = dao.selectUser(myno);
+		
+		request.setAttribute("dto", dto);
+		pageContext.forward("userinfo.jsp");
 	}
 		
 %>
