@@ -18,9 +18,21 @@
 </script>
 </head>
 <body>
+<%
+	MyMemberDto logindto = (MyMemberDto)session.getAttribute("dto");
+
+	if(logindto==null){
+		pageContext.forward("index.jsp");
+	}
+%>
 <% List<MyMemberDto> list = (List<MyMemberDto>)request.getAttribute("list");%>
 
 <h1>회원정보조회</h1>
+<div>
+	<span><%=logindto.getMyname() %>님 환영합니다.(등급: <%=logindto.getMyrole() %> )</span>
+	<button onclick="location.href='membercontroller.jsp?command=logout'">로그아웃</button>
+</div>
+
 <table border="1">
 	<tr>
 		<th>번호</th>

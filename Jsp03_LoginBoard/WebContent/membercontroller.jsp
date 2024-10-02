@@ -92,6 +92,21 @@
 		
 		request.setAttribute("dto", dto);
 		pageContext.forward("userinfo.jsp");
+		
+	}else if(command.equals("registform")){
+		response.sendRedirect("registform.jsp");
+	}else if(command.equals("idchk")){
+		String myid = request.getParameter("myid");
+		
+		String res = dao.idChk(myid);
+		
+		boolean idnotused = true;
+		if(res != null){
+			idnotused=false;
+		}
+		
+		response.sendRedirect("idchk.jsp?idnotused="+idnotused);
+		
 	}
 		
 %>

@@ -164,4 +164,37 @@ public class MyMemberDao {
 		
 		return res;
 	}
+	
+	//id 중복 체크
+	public String idChk(String myid) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String res = null;
+		
+		String sql = " SELECT * FROM MYMEMBER WHERE MYID=? ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, myid);
+			System.out.println("03. query 준비: "+sql);
+			
+			rs = pstm.executeQuery();
+			System.out.println("04. query 실행 및 리턴");
+			
+			if(rs.next()) {
+				res = rs.getString(2);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+			System.out.println("05. db 종료\n");
+		}
+		return res;
+	}
 }
