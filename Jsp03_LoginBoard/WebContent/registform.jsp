@@ -29,6 +29,7 @@
 <body>
 <h1>회원가입</h1>
 <form action="membercontroller.jsp" method="post">
+	<input type="hidden" name="command" value="insertuser">
 	<table>
 		<tr>
 			<th>아이디</th>

@@ -7,6 +7,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function confirm(bool){
+		if(bool == "true"){
+			opener.document.getElementsByName("mypw")[0].focus();
+			opener.document.getElementsByName("myid")[0].title="y";
+		}else{
+			opener.document.getElementsByName("myid")[0].focus();
+		}
+		self.close();
+	}
+	
+	window.onload=function(){
+		let id = opener.document.getElementsByName("myid")[0].value;
+		
+		document.getElementsByName("id")[0].value = id;
+	}
+</script>
 </head>
 <body>
 <%
@@ -15,14 +32,14 @@
 
 <table>
 	<tr>
-		<td><input type="text" name="id"></td>
+		<td><input type="text" name="id" size="10" readonly="readonly"></td>
 	</tr>
 	<tr>
 		<td><%=idnotused.equals("true")?"아이디 생성 가능":"아이디 중복" %></td>
 	</tr>
 	<tr>
 		<td>
-			<input type="button" value="확인" onclick="">
+			<input type="button" value="확인" onclick="confirm('<%=idnotused%>');">
 		</td>
 	</tr>
 </table>

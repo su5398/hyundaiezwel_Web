@@ -9,6 +9,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function deleteUser(myno){
+		if(window.confirm("회원 탈퇴 하시겠습니까?")){
+			location.href="membercontroller.jsp?command=deleteuser&myno="+myno;
+		}
+	}
+</script>
 </head>
 <body>
 <% MyMemberDto dto = (MyMemberDto)request.getAttribute("dto"); %>
@@ -41,6 +48,12 @@
 	<tr>
 		<th>등급</th>
 		<td><%=dto.getMyrole().equals("USER")?"일반회원":"매니저" %></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" value="탈퇴" onclick="deleteUser(<%=dto.getMyno()%>);">
+			<input type="button" value="목록" onclick="location.href='usermain.jsp'">
+		</td>
 	</tr>
 </table>
 </body>

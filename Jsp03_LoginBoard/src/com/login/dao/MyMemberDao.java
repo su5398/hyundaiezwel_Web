@@ -197,4 +197,66 @@ public class MyMemberDao {
 		}
 		return res;
 	}
+	
+	//회원가입
+	public int insertUser(MyMemberDto dto) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int res = 0;
+		
+//		INSERT INTO MYMEMBER
+//		VALUES(SEQ_MYMEMBER.NEXTVAL,'ADMIN','1234','관리자','관리시 관리구 관리동','010-1234-5678','ADMIN@MYMEMBER.COM','Y','ADMIN');
+		String sql = " INSERT INTO MYMEMBER VALUES(SEQ_MYMEMBER.NEXTVAL, ?,?,?,?,?,?,'Y','USER') ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, dto.getMyid());
+			pstm.setString(2, dto.getMypw());
+			pstm.setString(3, dto.getMyname());
+			pstm.setString(4, dto.getMyaddr());
+			pstm.setString(5, dto.getMyphone());
+			pstm.setString(6, dto.getMyemail());
+			System.out.println("03. query 준비: "+sql);
+			
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+			
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			close(con);
+			System.out.println("05. db 종료\n");
+		}
+		return res;
+	}
+	
+	//회원탈퇴
+	public int deleteUser(int myno) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int res = 0;
+		//3. db에 저장된 회원 탈퇴
+		String sql = " UPDATE MYMEMBER SET MYENABLED='N' "+" WHERE MYNO=? ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, myno);
+			
+			System.out.println("03. query 준비: "+sql);
+			
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+			
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			close(con);
+			System.out.println("05. db 종료\n");
+		}
+		return res;
+	}
 }

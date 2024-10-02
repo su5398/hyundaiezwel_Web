@@ -107,6 +107,47 @@
 		
 		response.sendRedirect("idchk.jsp?idnotused="+idnotused);
 		
+	}else if(command.equals("insertuser")){
+		String myid = request.getParameter("myid");
+		String mypw = request.getParameter("mypw");
+		String myname = request.getParameter("myname");
+		String myaddr = request.getParameter("myaddr");
+		String myphone = request.getParameter("myphone");
+		String myemail = request.getParameter("myemail");
+		
+		MyMemberDto dto = new MyMemberDto();
+		dto.setMyid(myid);
+		dto.setMypw(mypw);
+		dto.setMyname(myname);
+		dto.setMyaddr(myaddr);
+		dto.setMyphone(myphone);
+		dto.setMyemail(myemail);
+		
+		int res = dao.insertUser(dto);
+		
+		if(res>0){
+			request.setAttribute("msg","회원가입 성공");
+			request.setAttribute("url","index.jsp");
+		}else{
+			request.setAttribute("msg","회원가입 실패");
+			request.setAttribute("url","membercontroller.jsp?command=registform");
+		}
+		pageContext.forward("result.jsp");
+	}else if(command.equals("deleteuser")){
+		//1. request에 담겨 넘어오는 "myno" 받기
+		int myno = Integer.parseInt(request.getParameter("myno"));
+		//2. dao 실행하여 탈퇴 진행
+		int res = dao.deleteUser(myno);
+		
+		//4. 탈퇴 처리 후 result.jsp로 화면 전환
+		if(res>0){
+			request.setAttribute("msg","회원탈퇴 성공");
+			request.setAttribute("url","membercontroller.jsp?command=logout");
+		}else{
+			request.setAttribute("msg","회원탈퇴 실패");
+			request.setAttribute("url","membercontroller.jsp?command=userinfo&myno="+myno);
+		}
+		pageContext.forward("result.jsp");
 	}
 		
 %>
