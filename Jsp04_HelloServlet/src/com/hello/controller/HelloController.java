@@ -1,6 +1,7 @@
 package com.hello.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -25,9 +26,21 @@ public class HelloController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("get방식!");
+		doPost(request,response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("post방식!");
+		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String command = request.getParameter("command");
+		System.out.println("parameter: " + command);
+		
+		PrintWriter out = response.getWriter();
+		out.print("<h1 style='background-color:skyblue;'>helloServlet</h1>");
+		out.print("<h2>servlet 라이프사이클, url mapping, command"+command+"</h2>");
+		out.print("<a href='home.html'>돌아가기</a>");
 	}
 	
 	@Override

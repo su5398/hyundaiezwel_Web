@@ -3,7 +3,7 @@
   <display-name>Jsp04_HelloServlet</display-name>
   <!-- 프로젝트 이름으로 기본 설정. 우리가 만든 웹 어플리케이션의 이름을 지정. -->
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>home.html</welcome-file>
   </welcome-file-list>
   <!-- 웹 어플리케시션 실행 시 가장 먼저 보여줄 페이지를 정의. 시작페이지 -->
   
