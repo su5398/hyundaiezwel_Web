@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@page import="com.el.controller.Score"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,5 +39,9 @@
 		<td>${requestScope.sc.avg }</td>
 	</tr>
 </table>
+
+<hr>
+
+<c:out value="${test }"></c:out>
 </body>
 </html>
