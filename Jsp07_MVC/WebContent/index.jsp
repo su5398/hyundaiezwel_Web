@@ -8,6 +8,6 @@
 </head>
 <body>
 <h1>index</h1>
-<a href="">글목록</a>
+<a href="controller.do?command=list">글 목록</a>
 </body>
 </html>
