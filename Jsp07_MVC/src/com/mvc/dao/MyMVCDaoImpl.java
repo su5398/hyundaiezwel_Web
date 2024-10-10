@@ -93,12 +93,49 @@ public class MyMVCDaoImpl implements MyMVCDao{
 
 	@Override
 	public boolean update(Connection con, MyMVCDto dto) {
-		return false;
+		PreparedStatement pstm = null;
+		int res = 0;
+		
+		try {
+			pstm = con.prepareStatement(updateSql);
+			pstm.setString(1, dto.getTitle());
+			pstm.setString(2, dto.getContent());
+			pstm.setInt(3, dto.getSeq());
+			System.out.println("03. query 준비: " + updateSql);
+			
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+			
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+		}
+		
+		return (res>0)?true:false;
 	}
 
 	@Override
 	public boolean delete(Connection con, int seq) {
-		return false;
+		PreparedStatement pstm = null;
+		int res = 0;
+		
+		try {
+			pstm = con.prepareStatement(deleteSql);
+			pstm.setInt(1, seq);
+			System.out.println("03. query 준비: "+deleteSql);
+			
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+			
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+		}
+		return (res>0)?true:false;
 	}
 
 }

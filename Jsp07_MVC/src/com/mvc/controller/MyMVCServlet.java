@@ -63,6 +63,52 @@ public class MyMVCServlet extends HttpServlet {
 			
 			RequestDispatcher dis = request.getRequestDispatcher("result.jsp");
 			dis.forward(request, response);
+			
+		}else if(command.equals("updateform")) {
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			
+			MyMVCDto dto = biz.selectOne(seq);
+			
+			request.setAttribute("dto", dto);
+			RequestDispatcher dis = request.getRequestDispatcher("boardupdate.jsp");
+			dis.forward(request, response);
+			
+		}else if(command.equals("boardupdate")) {
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			
+			MyMVCDto dto = new MyMVCDto();
+			dto.setTitle(title);
+			dto.setContent(content);
+			dto.setSeq(seq);
+			
+			boolean res = biz.update(dto);
+			
+			if(res) {
+				request.setAttribute("msg", "글 수정 성공");
+				request.setAttribute("url", "controller.do?command=detail&seq="+seq);
+			}else {
+				request.setAttribute("msg", "글 수정 실패");
+				request.setAttribute("url", "controller.do?command=updateform&seq="+seq);
+			}
+			RequestDispatcher dis = request.getRequestDispatcher("result.jsp");
+			dis.forward(request, response);
+			
+		}else if(command.equals("delete")) {
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			
+			boolean res = biz.delete(seq);
+			
+			if(res) {
+				request.setAttribute("msg", "글 삭제 성공");
+				request.setAttribute("url", "controller.do?command=list");
+			}else {
+				request.setAttribute("msg", "글 삭제 실패");
+				request.setAttribute("url", "controller.do?command=detail&seq="+seq);
+			}
+			RequestDispatcher dis = request.getRequestDispatcher("result.jsp");
+			dis.forward(request, response);
 		}
 		
 	}
