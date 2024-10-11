@@ -32,7 +32,7 @@
 						<c:forEach begin="1" end="${dto.titletab }">
 							&nbsp;
 						</c:forEach>
-						${dto.title }
+						<a href="answer.do?command=detail&boardno=${dto.boardno }">${dto.title }</a>
 					</td>
 					<td>${dto.writer }</td>
 					<td>${dto.date }</td>

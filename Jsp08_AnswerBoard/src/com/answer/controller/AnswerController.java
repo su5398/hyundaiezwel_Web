@@ -34,6 +34,54 @@ public class AnswerController extends HttpServlet {
 			
 		}else if(command.equals("writeform")) {
 			response.sendRedirect("boardwrite.jsp");
+		}else if(command.equals("boardwrite")) {
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			String writer = request.getParameter("writer");
+			
+			AnswerDto dto = new AnswerDto();
+			dto.setTitle(title);
+			dto.setContent(content);
+			dto.setWriter(writer);
+			
+			int res = dao.insert(dto);
+			
+			if(res>0) {
+				request.setAttribute("msg", "글 작성 성공");
+				request.setAttribute("url", "answer.do?command=list");
+			}else {
+				request.setAttribute("msg", "글 작성 실패");
+				request.setAttribute("url", "answer.do?command=writeform");
+			}
+			
+			RequestDispatcher dis = request.getRequestDispatcher("result.jsp");
+			dis.forward(request, response);
+			
+		}else if(command.equals("detail")) {
+			int boardno = Integer.parseInt(request.getParameter("boardno"));
+			
+			AnswerDto dto = dao.selectOne(boardno);
+			
+			request.setAttribute("dto", dto);
+			RequestDispatcher dis = request.getRequestDispatcher("boarddetail.jsp");
+			dis.forward(request, response);
+		}else if(command.equals("updateform")) {
+			int boardno = Integer.parseInt(request.getParameter("boardno"));
+			
+			AnswerDto dto = dao.selectOne(boardno);
+			request.setAttribute("dto", dto);
+			RequestDispatcher dis = request.getRequestDispatcher("boardupdate.jsp");
+			dis.forward(request, response);
+			
+		}else if(command.equals("boardupdate")) {
+			int boardno = Integer.parseInt(request.getParameter("boardno"));
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			
+			AnswerDto dto = new AnswerDto();
+			dto.setBoardno(boardno);
+			dto.setTitle(title);
+			dto.setContent(content);
 		}
 		
 	}
