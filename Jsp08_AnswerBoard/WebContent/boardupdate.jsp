@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>글 수정</h1>
-<form action="answer.do" method="post"></form>
+<form action="answer.do" method="post">
 	<input type="hidden" name="command" value="boardupdate">
 	<input type="hidden" name="boardno" value="${dto.boardno }">
 	<table>
@@ -31,5 +31,6 @@
 			</td>
 		</tr>
 	</table>
+</form>
 </body>
 </html>

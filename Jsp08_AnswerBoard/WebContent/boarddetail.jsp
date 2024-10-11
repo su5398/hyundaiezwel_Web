@@ -32,8 +32,8 @@
 	<tr>
 		<td colspan="2">
 			<input type="button" value="수정" onclick="location.href='answer.do?command=updateform&boardno=${dto.boardno}'">
-			
-			<input type="button" value="목록" onclick="loation.href='answer.do?command=list'">
+			<input type="button" value="답변글" onclick="location.href='answer.do?command=answerform&parentboardno=${dto.boardno}'">
+			<input type="button" value="목록" onclick="location.href='answer.do?command=list'">
 		</td>
 	</tr>
 </table>
