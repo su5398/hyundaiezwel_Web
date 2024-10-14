@@ -31,6 +31,7 @@ public class CalScore extends HttpServlet {
 		
 		//{n:v, n:v}
 		//String res = "{name:'"+name+"', sum:"+sum+", avg:"+avg+"}";
+		//String res = "{\"name\":\""+name+"\", \"sum\":"+sum+", \"avg\":"+avg+"}";
 		//System.out.println(res);
 		
 		/*
@@ -46,6 +47,8 @@ public class CalScore extends HttpServlet {
 		obj.put("name", name);
 		obj.put("sum", sum);
 		obj.put("avg", avg);
+		
+		System.out.println(obj.toJSONString());
 		
 		PrintWriter out = response.getWriter();
 		out.println(obj.toJSONString());
