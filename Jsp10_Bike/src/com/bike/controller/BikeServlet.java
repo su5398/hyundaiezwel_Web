@@ -1,11 +1,16 @@
 package com.bike.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.bike.dto.BikeDto;
 
 @WebServlet("/bike")
 public class BikeServlet extends HttpServlet {
@@ -20,6 +25,21 @@ public class BikeServlet extends HttpServlet {
 		
 		if(command.equals("first")) {
 			response.sendRedirect("bike01.jsp");
+		}else if(command.equals("first_db")) {
+			String[] bikeList = request.getParameterValues("bike");
+			
+			List<BikeDto> dtos = new ArrayList<BikeDto>();
+			for(int i=0; i<bikeList.length; i++) {
+				String[] tmp = bikeList[i].split("/");
+				BikeDto dto = new BikeDto(tmp[0],
+										  Integer.parseInt(tmp[1]),
+										  tmp[2],
+										  tmp[3],
+										  Integer.parseInt(tmp[4]),
+										  Double.parseDouble(tmp[5]),
+										  Double.parseDouble(tmp[6]));
+			}
+			
 		}
 	}
 
