@@ -6,7 +6,7 @@
 	
 	<!-- typeAlias -->
 	<typeAliases>
-		<typeAlias type="com.my.model.dto.MyBoardDto" alias="MyBoardDto"/>
+		<typeAlias type="com.my.model.dto.MyBoard" alias="MyBoardDto"/>
 	</typeAliases>
 	
 	<!-- db 접속 설정 -->
