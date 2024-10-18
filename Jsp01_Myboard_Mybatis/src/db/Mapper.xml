@@ -16,14 +16,14 @@
 		ORDER BY MYNO DESC
 	</select>
 
-	<select id="selectOne" resultMap="MyBoardMap">
+	<select id="selectOne" resultMap="MyBoardMap" parameterType="int">
 		SELECT *
 		FROM MYBOARD
 		WHERE MYNO = #{myno}
 	</select>
 
 	<!-- resultType 필요없음 -->
-	<insert id="">
+	<insert id="myinsert" parameterType="MyBoardDto" >
 		INSERT INTO MYBOARD
 		VALUES(SEQ_MYBOARD.NEXTVAL, #{myname},#{mytitle},#{mycontent}, CURRENT_DATE)
 	</insert>
