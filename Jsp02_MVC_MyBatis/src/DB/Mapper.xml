@@ -19,4 +19,29 @@
 		FROM MVCBOARD
 		WHERE SEQ=#{seq}
 	</select>
+	
+	<insert id="insert" parameterType="BDto">
+		INSERT INTO MVCBOARD
+		VALUES(SEQ_MVCBOARD.NEXTVAL,#{writer},#{title},#{content},CURRENT_DATE)
+	</insert>
+	
+	<update id="update" parameterType="BDto">
+		UPDATE MVCBOARD
+		SET TITLE=#{title}, CONTENT=#{content}
+		WHERE SEQ=#{seq}
+	</update>
+	
+	<delete id="delete" parameterType="BDto">
+		DELETE FROM MVCBOARD WHERE SEQ=#{seq}
+	</delete>
+	
+	<delete id="muldel" >
+		DELETE
+		FROM MVCBOARD
+		WHERE SEQ IN 
+		<foreach collection="seq" item="no" open="(" separator="," close=")">
+			#{no}
+		</foreach>
+	</delete>
+	
 </mapper>

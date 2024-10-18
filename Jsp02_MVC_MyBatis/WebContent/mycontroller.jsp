@@ -111,6 +111,20 @@
 			request.setAttribute("url","mycontroller.jsp?command=boarddetail&seq="+seq);
 		}
 		pageContext.forward("result.jsp");
+	}else if(command.equals("muldel")){
+		//name=chk 인 parameter
+		String[] seq = request.getParameterValues("chk");
+		
+		int res = dao.multiDelete(seq);
+		
+		if(res>0){
+			request.setAttribute("msg","체크된 글들 삭제 성공");
+			request.setAttribute("url","mycontroller.jsp?command=boardlist");
+		}else{
+			request.setAttribute("msg","체크된 글들 삭제 실패");
+			request.setAttribute("url","mycontroller.jsp?command=boarddetail");
+		}
+		pageContext.forward("result.jsp");	
 	}
 %>
 </body>
